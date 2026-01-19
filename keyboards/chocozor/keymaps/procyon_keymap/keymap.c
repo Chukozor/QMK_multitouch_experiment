@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //--------------------------------------.                                           -----------------------------------------------------.
        FR_A, KC_B, KC_C, KC_D, KC_E, KC_F,                                            S(FR_A), S(KC_B), S(KC_C), S(KC_D), S(KC_E), S(KC_F), 
   //|------+-----+-----+-----+-----+------|                                          |-------+--------+--------+--------+--------+---------|
-       KC_G, KC_H, KC_I, KC_J, KC_K, KC_L,                                            S(KC_G), S(KC_H), S(KC_I), S(KC_J), S(KC_K), S(KC_L), 
+    DB_TOGG, KC_H, KC_I, KC_J, KC_K, KC_L,                                            S(KC_G), S(KC_H), S(KC_I), S(KC_J), S(KC_K), S(KC_L), 
   //|------+-----+-----+-----+-----+------|                                          |-------+--------+--------+--------+--------+---------|
        KC_M, KC_N, KC_O, KC_P, FR_Q, KC_R,                                            S(KC_M), S(KC_N), S(KC_O), S(KC_P), S(FR_Q), S(KC_R), 
   //|------+-----+-----+-----+-----+------|                                          |-------+--------+--------+--------+--------+---------|
@@ -40,6 +40,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
+void keyboard_post_init_user(void) {
+  // Customise these values to desired behaviour
+  debug_enable=true;
+  debug_matrix=true;
+  debug_keyboard=true;
+  debug_mouse=true;
+}
 
 // // // ==============================================
 // void render_layer_status(void) {

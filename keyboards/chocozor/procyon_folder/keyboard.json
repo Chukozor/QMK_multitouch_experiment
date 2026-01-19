@@ -9,7 +9,8 @@
   "features": {
       "extrakey": true,
       "nkro": true,
-      "digitizer": true
+      "digitizer": true,
+      "pointing_device": true
   },
   "ws2812": {
       "driver": "vendor",
