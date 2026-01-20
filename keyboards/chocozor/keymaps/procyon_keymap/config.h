@@ -23,9 +23,51 @@
 #define I2C1_CLOCK_SPEED 1000000
 #define DIGITIZER_MOTION_PIN GP18
 #define DIGITIZER_MOTION_PIN_ACTIVE_LOW yes
-#define PROCYON_57_80
 #define MXT_INVERT_X
 #define MXT_INVERT_Y
+/* Original PROCYON_57_80
+#    define MXT_SENSOR_WIDTH_MM 57
+#    define MXT_SENSOR_HEIGHT_MM 80
+#    define MXT_MATRIX_X_SIZE 14
+#    define MXT_MATRIX_Y_SIZE 20
+#    define MXT_MESALLOW 3
+*/
+// #define PROCYON_57_80
+
+/* Modified PROCYON_57_80 */
+#define MXT_SENSOR_WIDTH_MM 128
+#define MXT_SENSOR_HEIGHT_MM 92
+#define MXT_MATRIX_X_SIZE 14
+#define MXT_MATRIX_Y_SIZE 20
+#define MXT_MESALLOW 3
+
+#    ifndef MXT_GAIN
+#        define MXT_GAIN 10
+#    endif
+#    ifndef MXT_TOUCH_THRESHOLD
+#        define MXT_TOUCH_THRESHOLD 20
+#    endif
+#    ifndef MXT_TOUCH_HYST
+#        define MXT_TOUCH_HYST 10
+#    endif
+#    ifndef MXT_INTERNAL_TOUCH_THRESHOLD
+#        define MXT_INTERNAL_TOUCH_THRESHOLD 10
+#    endif
+#    ifndef MXT_INTERNAL_TOUCH_HYST
+#        define MXT_INTERNAL_TOUCH_HYST 5
+#    endif
+#    define MXT_T56_SHIELDLESS_ENABLE
+#    define MXT_RETRANSMISSION_COMPENSATION_ENABLE 0
+#    define MXT_X_PITCH 38 // Procyon boards have a standard 3.8mm pitch
+#    define MXT_Y_PITCH 38
+#    define MXT_ACTIVE_ACQUISITION_INTERVAL 255 // Free run while active - this enables us to reach a polling rate of around 300Hz
+#    define MXT_CONFTHR 5 // Increase debounce time
+#    define MXT_MOVE_HYSTERESIS_NEXT 16
+
+
+
+
+
 // #define SPLIT_DIGITIZER_ENABLE
 // #define DIGITIZER_RIGHT
 // #define DIGITIZER_LEFT
