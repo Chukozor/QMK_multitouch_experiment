@@ -20,6 +20,42 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
     }
 
+
+
+#include "deferred_exec.h"
+extern void maxtouch_print_info(void);
+extern bool digitizer_send_mouse_reports;
+
+uint32_t mouse_mode(uint32_t trigger_time, void* cb_arg) {
+    digitizer_send_mouse_reports = false;
+    return 0;
+}
+
+void keyboard_post_init_user(void) {
+    defer_exec(2000, mouse_mode, NULL);
+    pointing_device_set_cpi(10000);
+      // Customise these values to desired behaviour
+    debug_enable=true;
+    debug_matrix=true;
+    debug_keyboard=true;
+    debug_mouse=true;
+}
+
+void pointing_device_init_kb(void) {
+    pointing_device_set_cpi(10000);
+}
+
+// void pointing_device_init_user(void) {
+//     // set_auto_mouse_layer(_MOUSE_LAYER); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
+//     // set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
+//     pointing_device_set_cpi(5000);
+// }
+    // eeconfig_read_kb();
+    // if (keyboard_config.dpi_config > DPI_OPTION_SIZE) {
+    //     eeconfig_init_kb();
+
+
+
 // -----------------------------------
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -28,9 +64,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //--------------------------------------.                                           -----------------------------------------------------.
        FR_A, KC_B, KC_C, KC_D, KC_E, KC_F,                                            S(FR_A), S(KC_B), S(KC_C), S(KC_D), S(KC_E), S(KC_F), 
   //|------+-----+-----+-----+-----+------|                                          |-------+--------+--------+--------+--------+---------|
-    DB_TOGG, KC_H, KC_I, KC_J, KC_K, KC_L,                                            S(KC_G), S(KC_H), S(KC_I), S(KC_J), S(KC_K), S(KC_L), 
+       KC_G, KC_H, KC_I, KC_J, KC_K, KC_L,                                            S(KC_G), S(KC_H), S(KC_I), S(KC_J), S(KC_K), S(KC_L), 
   //|------+-----+-----+-----+-----+------|                                          |-------+--------+--------+--------+--------+---------|
-       KC_M, KC_N, KC_O, KC_P, FR_Q, KC_R,                                            S(KC_M), S(KC_N), S(KC_O), S(KC_P), S(FR_Q), S(KC_R), 
+       DB_TOGG, KC_N, KC_O, KC_P, FR_Q, KC_R,                                            S(KC_M), S(KC_N), S(KC_O), S(KC_P), S(FR_Q), S(KC_R), 
   //|------+-----+-----+-----+-----+------|                                          |-------+--------+--------+--------+--------+---------|
        KC_U, KC_V, FR_W, KC_X, KC_Y, FR_Z,                                            S(KC_U), S(KC_V), S(FR_W), S(KC_X), S(KC_Y), S(FR_Z), 
   //|------+-----+-----+-----+-----+------|                                          |-------+--------+--------+--------+--------+---------|
@@ -40,13 +76,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-void keyboard_post_init_user(void) {
-  // Customise these values to desired behaviour
-  debug_enable=true;
-  debug_matrix=true;
-  debug_keyboard=true;
-  debug_mouse=true;
-}
 
 // // // ==============================================
 // void render_layer_status(void) {
